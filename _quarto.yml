@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "andrealianto.github.io"
+  title: "Andrea Lianto"
   navbar:
     left:
       - href: index.qmd
@@ -12,7 +12,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: simplex
     css: styles.css
     toc: true
 

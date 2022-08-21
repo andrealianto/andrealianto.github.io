@@ -1,7 +1,24 @@
 ---
-title: "andrealianto.github.io"
+title: "Andrea Lianto"
+about:
+    template: trestles
+    links:
+        - icon: linkedin
+          href: https://www.linkedin.com/in/andrealianto/
+        - icon: twitter
+          href: https://twitter.com/
+        - icon: github
+          href: https://github.com/andrealianto
 ---
 
-This is a Quarto website.
+I'm a/an:
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+-   🍦 ice cream lover,
+
+-   🌎 language learner,
+
+-   🎸 folk music guitarist, and
+
+-   👩‍💻 real-world practitioner of data analysis in the tech industry
+
+I love playing with data, making beautiful charts, and chatting about technical topics.
