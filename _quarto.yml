@@ -3,12 +3,13 @@ project:
   output-dir: docs
 
 website:
-  title: "Andrea Lianto"
+  # title: "Andrea Lianto"
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - about.qmd
+        text: About
+      - href: about.qmd
+        text: Blog
 
 format:
   html:
