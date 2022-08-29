@@ -4,18 +4,30 @@ project:
 
 website:
   # title: "Andrea Lianto"
+  # page-footer: "Copyright 2022, Andrea Lianto" 
+  # repo-url: https://github.com/andrealianto/andrealianto.github.io
+  # repo-actions: [edit, issue]
   navbar:
-    left:
-      - href: index.qmd
-        text: About
+    # search: true
+    right:
       - href: about.qmd
         text: Blog
+      - href: index.qmd
+        text: About
+      - icon: github
+        href: https://github.com/andrealianto
+      - icon: linkedin
+        href: https://www.linkedin.com/in/andrealianto/
+      - icon: music-note-list
+        href: https://www.youtube.com
 
 format:
   html:
     theme: simplex
     css: styles.css
     toc: true
+    toc-location: "right"
+    fontsize: 1em
 
 
 

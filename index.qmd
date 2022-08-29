@@ -6,12 +6,10 @@ about:
     image-width: 12em
     image-shape: round
     links:
-        - icon: linkedin
-          href: https://www.linkedin.com/in/andrealianto/
-        - icon: twitter
-          href: https://twitter.com/
         - icon: github
           href: https://github.com/andrealianto
+        - icon: linkedin
+          href: https://www.linkedin.com/in/andrealianto/
 ---
 
 ## Hello, there 👋🏼
