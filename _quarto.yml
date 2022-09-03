@@ -10,7 +10,7 @@ website:
   navbar:
     # search: true
     right:
-      - href: about.qmd
+      - href: blog.qmd
         text: Blog
       - href: index.qmd
         text: About
