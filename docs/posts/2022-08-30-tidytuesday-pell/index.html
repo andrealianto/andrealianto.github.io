@@ -8,7 +8,7 @@
 
 <meta name="author" content="Andrea Lianto">
 <meta name="dcterms.date" content="2022-09-03">
-<meta name="description" content="Tidy Tuesday | 2022-08-30">
+<meta name="description" content="How does Pell Grant award vary across the US states? We create a dumbbell chart using ggplot2 package to understand the variation within and across states.">
 
 <title>Pell Grant Awards</title>
 <style>
@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <h1 class="title">Pell Grant Awards</h1>
                   <div>
         <div class="description">
-          Tidy Tuesday | 2022-08-30
+          How does Pell Grant award vary across the US states? We create a dumbbell chart using ggplot2 package to understand the variation within and across states.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -210,8 +210,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
   <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load Data</a></li>
   <li><a href="#explore-data" id="toc-explore-data" class="nav-link" data-scroll-target="#explore-data">Explore Data</a></li>
-  <li><a href="#dumbbell-chart-visualizing-variation-of-award-amounts" id="toc-dumbbell-chart-visualizing-variation-of-award-amounts" class="nav-link" data-scroll-target="#dumbbell-chart-visualizing-variation-of-award-amounts">Dumbbell Chart: Visualizing variation of award amounts</a></li>
-  <li><a href="#more-ideas" id="toc-more-ideas" class="nav-link" data-scroll-target="#more-ideas">More ideas!</a></li>
+  <li><a href="#dumbbell-chart-visualize-award-variation" id="toc-dumbbell-chart-visualize-award-variation" class="nav-link" data-scroll-target="#dumbbell-chart-visualize-award-variation">Dumbbell Chart: Visualize award variation</a></li>
+  <li><a href="#more-ideas" id="toc-more-ideas" class="nav-link" data-scroll-target="#more-ideas">More ideas</a></li>
   </ul>
 </nav>
     </div>
@@ -364,8 +364,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In Texas, the award per student looks roughly similar. In California, we can see a bigger difference across universities.</p>
 <p>Okay, so now that I have a rough feel of the data, I’d like to visualize the range of Pell Grant award amount that a student can expect in different states.</p>
 </section>
-<section id="dumbbell-chart-visualizing-variation-of-award-amounts" class="level2">
-<h2 class="anchored" data-anchor-id="dumbbell-chart-visualizing-variation-of-award-amounts">Dumbbell Chart: Visualizing variation of award amounts</h2>
+<section id="dumbbell-chart-visualize-award-variation" class="level2">
+<h2 class="anchored" data-anchor-id="dumbbell-chart-visualize-award-variation">Dumbbell Chart: Visualize award variation</h2>
 <p>I want to create a dumbbell chart, inspired by <a href="https://www.bbc.com/news/education-44395621">this BBC article</a> (see the chart “Earnings vary across unis even within subject”). The idea is to illustrate the variance of Pell Grant within the same state.</p>
 <p>I’ve never created a dumbbell chart before, so I’m following <a href="https://r-graph-gallery.com/web-extended-dumbbell-plot-ggplot2.html">this tutorial</a> as a start.</p>
 <div class="cell">
@@ -420,37 +420,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pell_max_min <span class="sc">%&gt;%</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> award_per_person, </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> state, </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> type),</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">2</span>, <span class="at">show.legend =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="at">data =</span> min_award,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">aes</span>(<span class="at">x =</span> award_per_person, <span class="at">y =</span> state,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">xend =</span> max_award<span class="sc">$</span>award_per_person,</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">yend =</span> max_award<span class="sc">$</span>state),</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"#aeb6bf"</span>,</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">2.5</span>,</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="at">data =</span> min_award,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">aes</span>(<span class="at">x =</span> award_per_person, <span class="at">y =</span> state,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">xend =</span> max_award<span class="sc">$</span>award_per_person,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">yend =</span> max_award<span class="sc">$</span>state),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"lightgrey"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">3.5</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> award_per_person, </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> state, </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> type),</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>, <span class="at">show.legend =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Amount"</span>,</span>
 <span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Max"</span>, <span class="st">"Min"</span>)) <span class="sc">+</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Award per student (USD)"</span>,</span>
 <span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"State"</span>,</span>
 <span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Pell Grant awards vary across colleges within the same state"</span>,</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Award amount per student in 2017"</span>) <span class="sc">+</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">"Range of grant amount per student in 2017"</span>) <span class="sc">+</span></span>
 <span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">base_size =</span> <span class="dv">14</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">base_family =</span> <span class="st">"Roboto Condensed"</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/dumbbell-viz-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="more-ideas" class="level2">
-<h2 class="anchored" data-anchor-id="more-ideas">More ideas!</h2>
+<h2 class="anchored" data-anchor-id="more-ideas">More ideas</h2>
 <p>Woohoo, I created my first dumbbell chart.</p>
 <p>If I had more time, here are some things I would want to explore:</p>
 <ul>

@@ -1,12 +1,12 @@
 ---
 title: "Pell Grant Awards"
-description: "Tidy Tuesday | 2022-08-30"
+description: "How does Pell Grant award vary across the US states? We create a dumbbell chart using ggplot2 package to understand the variation within and across states."
 author: "Andrea Lianto"
 date: "2022/09/03"
 categories:
   - TidyTuesday
   - analysis
-image: "/posts/2022-08-30-tidytuesday-pell/financial-aid.jpeg"
+image: "/posts/2022-08-30-tidytuesday-pell/dumbbell-viz-1.png"
 ---
 
 ## Background
@@ -142,7 +142,7 @@ In Texas, the award per student looks roughly similar. In California, we can see
 
 Okay, so now that I have a rough feel of the data, I'd like to visualize the range of Pell Grant award amount that a student can expect in different states.
 
-## Dumbbell Chart: Visualizing variation of award amounts
+## Dumbbell Chart: Visualize award variation
 
 I want to create a dumbbell chart, inspired by [this BBC article](https://www.bbc.com/news/education-44395621) (see the chart "Earnings vary across unis even within subject"). The idea is to illustrate the variance of Pell Grant within the same state.
 
@@ -187,38 +187,49 @@ Now, the data is ready for basic dumbbell plot. We'll use `ggplot2` package, `ge
 ```{r}
 #| label: dumbbell-viz
 #| warning: false
-#| fig-height: 10
+#| fig-height: 15
 
 pell_max_min %>% 
     ggplot() +
-    
-    geom_point(aes(x = award_per_person, 
-                   y = state, 
-                   color = type),
-               size = 2, show.legend = TRUE) +
     
     geom_segment(data = min_award,
                  aes(x = award_per_person, y = state,
                      xend = max_award$award_per_person,
                      yend = max_award$state),
-                 color = "#aeb6bf",
-                 size = 2.5,
+                 color = "lightgrey",
+                 size = 3.5,
                  alpha = 0.5) +
+    
+    geom_point(aes(x = award_per_person, 
+                   y = state, 
+                   color = type),
+               size = 3, show.legend = TRUE) +
     
     scale_x_continuous(labels = scales::comma) +
     
     scale_color_discrete(name = "Amount",
                          labels = c("Max", "Min")) +
-    
+
     labs(x = "Award per student (USD)",
          y = "State",
          title = "Pell Grant awards vary across colleges within the same state",
-         subtitle = "Award amount per student in 2017") +
+         subtitle = "Range of grant amount per student in 2017") +
     
-    theme_minimal()
+    theme_minimal(
+        base_size = 14,
+        base_family = "Roboto Condensed"
+    ) +
+    
+    theme(
+        panel.grid.minor = element_blank(),
+        plot.title = element_text(face = "bold"),
+        plot.title.position = "plot"
+    )
+    
+    
 ```
 
-## More ideas!
+## More ideas
 
 Woohoo, I created my first dumbbell chart.
 

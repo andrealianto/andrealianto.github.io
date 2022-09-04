@@ -1,5 +1,5 @@
 ---
-title: "Andrea Lianto - Blog"
+title: "Blog Posts"
 listing:
   contents: posts
   feed: true
@@ -8,9 +8,11 @@ listing:
     - "date desc"
     - "title desc"
   type: default
-  fields: [image, title, description, date, reading-time]
+  fields: [image, title, description, date, reading-time, categories]
   categories: true
-  date-format: "YYYY-MM-DD"
+  image-align: left
+  image-height: 300px
+  date-format: "MMMM D, YYYY"
   page-size: 9
 toc: false
 toc-location: body
